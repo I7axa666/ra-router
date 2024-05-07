@@ -4,7 +4,8 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EditPost from './components/EditPost.jsx'
-import PostCard from './components/PostCard.jsx';
+import PostCard from './components/PostCard.jsx'
+import CreatePost from './components/CreatePost.jsx';
 
 const router = createBrowserRouter([
   {
@@ -12,12 +13,16 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { 
-        path: "/posts", 
+        path: "/", 
         element: <PostCard /> 
       },
       { 
         path: "/posts/:id", 
         element: <EditPost /> 
+      },
+      { 
+        path: "/posts/new", 
+        element: <CreatePost /> 
       },
     ],
   },

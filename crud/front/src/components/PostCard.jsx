@@ -1,23 +1,29 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import getContacts from '../utilits/getContacts';
+import getPosts from '../utilits/getPosts';
+import { usePosts } from "./PostsContext"
+
 function PostCard() {
-  const [ posts, setPosts ] = useState([]);
+  const { posts, setPosts } = usePosts();
+  const [localPosts, setPostsLocal] = useState([]);
 
   const fetchPosts = async () => {
-    const postsfromDB = await getContacts();
-    setPosts([...posts, ...postsfromDB]);
+    const postsfromDB = await getPosts();
+    setPostsLocal(postsfromDB);
+    setPosts(postsfromDB);
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
+  // console.log(posts)
+
   return (
     <div className='posts'>
-      {posts && posts.length > 0 ? (
-        posts.map((post) => (
-          <Link to={`${post.id}`} className='post' key={post.id}>
+      {localPosts && localPosts.length > 0 ? (
+        localPosts.map((post) => (
+          <Link to={`posts/${post.id}`} className='post' key={post.id}>
             <div className='post-title'>Инфо о пользователе</div>
             <div className='post-text'>
               <h3>{post.content}</h3>
@@ -33,5 +39,3 @@ function PostCard() {
 }
 
 export default PostCard;
-
-  

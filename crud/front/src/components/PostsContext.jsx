@@ -1,6 +1,8 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState, useContext } from "react";
 
-const PostsContext = createContext([]);
+const PostsContext = createContext();
+
+export const usePosts = () => useContext(PostsContext);
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
@@ -9,7 +11,5 @@ export const PostsProvider = ({ children }) => {
     <PostsContext.Provider value={{ posts, setPosts }}>
       {children}
     </PostsContext.Provider>
-  );
-};
-
-export const usePosts = () => useContext(PostsContext);
+  )
+}
