@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import getPosts from '../utilits/getPosts';
 import { usePosts } from "./PostsContext"
 
 function PostCard() {
   const { posts, setPosts } = usePosts();
-  const [localPosts, setPostsLocal] = useState([]);
 
   const fetchPosts = async () => {
     const postsfromDB = await getPosts();
-    setPostsLocal(postsfromDB);
     setPosts(postsfromDB);
   };
 
@@ -17,12 +15,10 @@ function PostCard() {
     fetchPosts();
   }, []);
 
-  // console.log(posts)
-
   return (
     <div className='posts'>
-      {localPosts && localPosts.length > 0 ? (
-        localPosts.map((post) => (
+      {posts && posts.length > 0 ? (
+        posts.map((post) => (
           <Link to={`posts/${post.id}`} className='post' key={post.id}>
             <div className='post-title'>Инфо о пользователе</div>
             <div className='post-text'>

@@ -28,7 +28,8 @@ export default function EditPost() {
 
   const onChange = (e) => {
     const {value} = e.target
-    const regexp = /^[a-zA-Z0-9\s.,?!]*$/
+    const regexpString = import.meta.env.VITE_REGEXP + '$';
+    const regexp = new RegExp(regexpString);
     
     if (regexp.test(value) || value === '') {
       setText(value)

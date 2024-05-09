@@ -17,7 +17,6 @@ export default async function postPost(text, id=0) {
         throw new Error('Failed to fetch contacts');
       }
     } else {
-        console.log('put')
         const response = await fetch(`http://localhost:7070/posts/${id}`, {
         method: 'PUT',
         headers: {
